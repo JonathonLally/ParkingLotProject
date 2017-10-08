@@ -12,7 +12,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -34,9 +34,10 @@
       </Text>
       <Text layoutX="209.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="License Plate # :" />
       <Text layoutX="210.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type :" />
-      <TextField fx:id="plateNumField" layoutX="345.0" layoutY="142.0" />
-      <ChoiceBox fx:id="VehicleTypeBox" layoutX="345.0" layoutY="214.0" prefWidth="150.0" />
-      <Button fx:id="parkButton" layoutX="294.0" layoutY="290.0" mnemonicParsing="false" text="Park" />
+      <TextField fx:id="plateNumField" layoutX="345.0" layoutY="142.0" prefHeight="25.0" prefWidth="100.0" />
+      <ChoiceBox fx:id="VehicleTypeBox" layoutX="345.0" layoutY="214.0" prefHeight="25.0" prefWidth="100.0" />
+      <Button fx:id="parkButton" layoutX="251.0" layoutY="289.0" mnemonicParsing="false" onAction="#Park" text="Park" />
       <TextArea fx:id="resultText" editable="false" layoutX="214.0" layoutY="342.0" prefHeight="89.0" prefWidth="200.0" />
+      <Button fx:id="unParkButton" layoutX="345.0" layoutY="289.0" mnemonicParsing="false" onAction="#unParkPop" text="UnPark" />
    </children>
 </AnchorPane>
