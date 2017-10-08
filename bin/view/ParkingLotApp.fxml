@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ParkingLotController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="29.0" prefWidth="640.0" AnchorPane.bottomAnchor="451.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Text layoutX="220.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parking Lot Project">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="209.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="License Plate # :" />
+      <Text layoutX="210.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type :" />
+      <TextField fx:id="plateNumField" layoutX="345.0" layoutY="142.0" />
+      <ChoiceBox fx:id="VehicleTypeBox" layoutX="345.0" layoutY="214.0" prefWidth="150.0" />
+      <Button fx:id="parkButton" layoutX="294.0" layoutY="290.0" mnemonicParsing="false" text="Park" />
+      <TextArea fx:id="resultText" editable="false" layoutX="214.0" layoutY="342.0" prefHeight="89.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>
