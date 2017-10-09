@@ -6,5 +6,9 @@ public class Bus extends Vehicle{
 		super(plate);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getType() {
+		return "Bus";
+	}
 
 }

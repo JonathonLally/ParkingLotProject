@@ -6,5 +6,9 @@ public class Sedan extends Vehicle{
 		super(plate);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getType() {
+		return "Sedan";
+	}
 
 }

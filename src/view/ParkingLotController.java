@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ParkingLot;
 
@@ -34,7 +33,7 @@ public class ParkingLotController implements Initializable{
 	
 	@FXML
 	private TextField plateNumField;
-	
+		
 	private ParkingLot myParkingLot;
 
 	@Override
@@ -85,18 +84,13 @@ public class ParkingLotController implements Initializable{
 		toTextField(tempPlate + "\n" + tempVehicle);
 		myParkingLot.create(tempPlate, tempVehicle);
 		clearChoices();
+		toText();
 	}
 	
-	public void unParkPop() {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("UnParkPop.fxml"));
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.showAndWait();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	public void unPark() {
+		myParkingLot.search(getPlate());
+		toText();
 	}
+	
 
 }

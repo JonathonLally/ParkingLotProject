@@ -11,10 +11,14 @@ public abstract class Vehicle {
 	public String getPlate() {
 		return plateNum;
 	}
+	
+	public String getType() {
+		return "";
+	}
 
 	@Override
 	public String toString() {
-		return "Type " + this.getClass() + " License Plate # " + plateNum + "\n";
+		return "Type " + this.getType() + " License Plate # " + plateNum + "\n";
 	}
 	
 	
