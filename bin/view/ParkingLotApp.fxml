@@ -17,7 +17,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#editParkingLotSize" text="Resize" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -37,7 +37,7 @@
       <TextField fx:id="plateNumField" layoutX="232.0" layoutY="142.0" prefHeight="25.0" prefWidth="100.0" />
       <ChoiceBox fx:id="VehicleTypeBox" layoutX="232.0" layoutY="214.0" prefHeight="25.0" prefWidth="100.0" />
       <Button fx:id="parkButton" layoutX="138.0" layoutY="289.0" mnemonicParsing="false" onAction="#park" text="Park" />
-      <TextArea fx:id="resultText" editable="false" layoutX="375.0" layoutY="139.0" prefHeight="305.0" prefWidth="245.0" />
+      <TextArea fx:id="resultText" editable="false" layoutX="361.0" layoutY="139.0" prefHeight="305.0" prefWidth="258.0" />
       <Button fx:id="unParkButton" layoutX="232.0" layoutY="289.0" mnemonicParsing="false" onAction="#unPark" text="UnPark" />
       <Text layoutX="446.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Parking Lot" />
       <TextArea fx:id="helpText" editable="false" layoutX="120.0" layoutY="385.0" prefHeight="59.0" prefWidth="200.0" />

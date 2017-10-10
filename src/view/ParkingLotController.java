@@ -110,8 +110,7 @@ public class ParkingLotController implements Initializable{
 			toText();
 		} catch (NullPointerException e) {
 			toHelpTextArea("Please choose a Vehicle Type");
-		}
-		
+		}		
 		
 	}
 	
@@ -122,6 +121,11 @@ public class ParkingLotController implements Initializable{
 		myParkingLot.removeVehicle(plate);
 		toHelpTextArea(plate + " Removed");
 		toText();
+	}
+	
+	public void editParkingLotSize() { //Needs a new window to pop open and ask
+		myParkingLot = new ParkingLot(4, 5, 6, 3); //For now just another size
+		System.out.println("Parking Lot Size Changed");
 	}
 	
 	

@@ -18,6 +18,7 @@ public class ParkingLot {
 	private int currentSedanStackItem;
 	private int currentSuvStackItem;
 	private int currentBusStackItem;
+	private ParkingSpace[] parkingSpaceArray;
 	
 	
 	
@@ -36,6 +37,7 @@ public class ParkingLot {
 		currentSedanStackItem = 0;
 		currentSuvStackItem = 0;
 		currentBusStackItem = 0;
+		createParkingSpaces(motoSpaces, sedanSpaces, suvSpaces, busSpaces);
 	}
 	
 	public boolean checkForOpenMotorcycleSpots() {
@@ -145,20 +147,35 @@ public class ParkingLot {
 		
 	}
 	
-	public String display() { //Make this nice at some point TODO
-		return hashmap.values().toString();
-	}
-	
 	public String getDisplay() {
 		String output;
 		StringBuilder tempout = new StringBuilder();
 		for(Entry<String, ParkingSpace> entry:hashmap.entrySet()) {
 			String key = entry.getKey();
 			Vehicle temp = entry.getValue().getVehicle();
-			tempout.append(key + " " + temp.toString());
+			tempout.append("Plate# " + key + " " + temp.toString() + " "+ "Spot#  " +
+					entry.getValue().getParkingSpaceNumber() + "\n");
 		}
 		output = tempout.toString();
 		return output;
+	}
+	
+	public void createParkingSpaces(int motos, int sedans, int suvs, int buses) { //Creates array of parkingSpaces
+		int total = motos + sedans + suvs + buses;
+		parkingSpaceArray = new ParkingSpace[total];
+		int tempcount = 0;
+		for (int i = 0; i < motos; i++) {
+			parkingSpaceArray[tempcount] = new ParkingSpace("M" + tempcount++, "Motorcycle");
+		}
+		for (int i = 0; i < sedans; i++) {
+			parkingSpaceArray[tempcount] = new ParkingSpace("S" + tempcount++, "Sedan");
+		}
+		for (int i = 0; i < suvs; i++) {
+			parkingSpaceArray[tempcount] = new ParkingSpace("L" + tempcount++, "SUV");
+		}
+		for (int i = 0; i < buses; i++) {
+			parkingSpaceArray[tempcount] = new ParkingSpace("B" + tempcount++, "Bus");
+		}
 	}
 	
 	public void getNextAvailableParkingSpace() { //TODO

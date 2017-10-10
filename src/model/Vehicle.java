@@ -18,7 +18,7 @@ public abstract class Vehicle {
 
 	@Override
 	public String toString() {
-		return "Type " + this.getType() + " License Plate # " + plateNum + "\n";
+		return "Type " + this.getType();
 	}
 	
 	
