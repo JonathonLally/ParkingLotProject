@@ -2,21 +2,17 @@ package model;
 
 public class ParkingSpace {
 	
-	private String spacePlate;
-	private Vehicle vType;
+	private static int parkingSpaceNumberCount;
+	private int parkingSpaceNumber;
+	private Vehicle parkedVehicle;
 	
-	public ParkingSpace (Vehicle vehicle, String plate) {
-		this.vType = vehicle;
-		this.spacePlate = plate;
+	public ParkingSpace (Vehicle vehicle) {
+		this.parkedVehicle = vehicle;
 		
 	}
 
-	public String getPlate() {
-		return spacePlate;
-	}
-	
 	public Vehicle getVehicle() {
-		return vType;
+		return parkedVehicle;
 	}
 
 }

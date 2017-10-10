@@ -36,7 +36,7 @@
       <Text layoutX="97.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type :" />
       <TextField fx:id="plateNumField" layoutX="232.0" layoutY="142.0" prefHeight="25.0" prefWidth="100.0" />
       <ChoiceBox fx:id="VehicleTypeBox" layoutX="232.0" layoutY="214.0" prefHeight="25.0" prefWidth="100.0" />
-      <Button fx:id="parkButton" layoutX="138.0" layoutY="289.0" mnemonicParsing="false" onAction="#Park" text="Park" />
+      <Button fx:id="parkButton" layoutX="138.0" layoutY="289.0" mnemonicParsing="false" onAction="#park" text="Park" />
       <TextArea fx:id="resultText" editable="false" layoutX="375.0" layoutY="139.0" prefHeight="305.0" prefWidth="245.0" />
       <Button fx:id="unParkButton" layoutX="232.0" layoutY="289.0" mnemonicParsing="false" onAction="#unPark" text="UnPark" />
    </children>

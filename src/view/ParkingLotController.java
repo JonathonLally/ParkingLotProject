@@ -15,7 +15,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Bus;
+import model.Motorcycle;
 import model.ParkingLot;
+import model.Sedan;
+import model.Suv;
+import model.Vehicle;
 
 public class ParkingLotController implements Initializable{
 	
@@ -44,6 +49,7 @@ public class ParkingLotController implements Initializable{
 	}
 	
 	public void createParkingLot() {
+		//Creates sample parking lot with space for 5 motorcycles, 20 sedans, 10 suvs, and 2 buses
 		myParkingLot = new ParkingLot(5,20,10,2);
 	}
 	
@@ -55,14 +61,9 @@ public class ParkingLotController implements Initializable{
 		resultText.setText(input);
 	}
 	
-	public void testTextField() {
-		myParkingLot.display();
-	}
-	
 	public void toText() {
-		String temp = myParkingLot.getDisplay();
 		resultText.clear();
-		resultText.setText(temp.toString());
+		resultText.setText(myParkingLot.display());
 	}
 	
 	public String getPlate() {
@@ -78,19 +79,34 @@ public class ParkingLotController implements Initializable{
 		VehicleTypeBox.setValue(null);
 	}
 	
-	public void Park() {
-		String tempPlate = getPlate();
-		String tempVehicle = getVType();
-		toTextField(tempPlate + "\n" + tempVehicle);
-		myParkingLot.create(tempPlate, tempVehicle);
+	public void park() {
+		String plate = getPlate();
+		String vType = getVType();
 		clearChoices();
+		if (vType.equals("Motorcycle")) {
+			myParkingLot.addMotorCycle(new Motorcycle(plate));
+		} else if (vType.equals("Sedan")) {
+			myParkingLot.addSedan(new Sedan(plate));
+		} else if (vType.equals("SUV")) {
+			myParkingLot.addSuv(new Suv(plate));
+		} else if (vType.equals("Bus")) {
+			myParkingLot.addBus(new Bus(plate));
+		}
+		else {
+			System.out.println("Park Not working");
+		}
 		toText();
 	}
 	
+
+	
 	public void unPark() {
-		myParkingLot.search(getPlate());
+		String plate = getPlate();
+		myParkingLot.removeVehicle(plate);
 		toText();
 	}
+	
+	
 	
 
 }
