@@ -1,26 +1,21 @@
 package view;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import model.Bus;
 import model.Motorcycle;
 import model.ParkingLot;
 import model.Sedan;
 import model.Suv;
-import model.Vehicle;
 
 public class ParkingLotController implements Initializable{
 	
@@ -35,6 +30,9 @@ public class ParkingLotController implements Initializable{
 	
 	@FXML
 	private TextArea resultText;
+	
+	@FXML
+	private TextArea helpText;
 	
 	@FXML
 	private TextField plateNumField;
@@ -63,7 +61,11 @@ public class ParkingLotController implements Initializable{
 	
 	public void toText() {
 		resultText.clear();
-		resultText.setText(myParkingLot.display());
+		resultText.setText(myParkingLot.getDisplay());
+	}
+	
+	public void toHelpTextArea(String input) {
+		helpText.setText(input);
 	}
 	
 	public String getPlate() {
@@ -79,23 +81,38 @@ public class ParkingLotController implements Initializable{
 		VehicleTypeBox.setValue(null);
 	}
 	
+	public void checkBlankPlate() {
+		if (getPlate().equals("")) {
+			toHelpTextArea("Please enter a License Plate #");
+		}
+	}
+	
 	public void park() {
-		String plate = getPlate();
-		String vType = getVType();
-		clearChoices();
-		if (vType.equals("Motorcycle")) {
-			myParkingLot.addMotorCycle(new Motorcycle(plate));
-		} else if (vType.equals("Sedan")) {
-			myParkingLot.addSedan(new Sedan(plate));
-		} else if (vType.equals("SUV")) {
-			myParkingLot.addSuv(new Suv(plate));
-		} else if (vType.equals("Bus")) {
-			myParkingLot.addBus(new Bus(plate));
+		try {
+			String plate = getPlate();
+			String vType = getVType();
+			clearChoices();
+			if (vType.equals("Motorcycle")) {
+				myParkingLot.addMotorCycle(new Motorcycle(plate));
+			} else if (vType.equals("Sedan")) {
+				myParkingLot.addSedan(new Sedan(plate));
+			} else if (vType.equals("SUV")) {
+				myParkingLot.addSuv(new Suv(plate));
+			} else if (vType.equals("Bus")) {
+				myParkingLot.addBus(new Bus(plate));
+			} else if (vType.equals(null)) {
+				toHelpTextArea("Please choose a Vehicle Type");
+			}
+			else {
+				System.out.println("Park Not working");			
+			}
+			toHelpTextArea(plate + " Added");
+			toText();
+		} catch (NullPointerException e) {
+			toHelpTextArea("Please choose a Vehicle Type");
 		}
-		else {
-			System.out.println("Park Not working");
-		}
-		toText();
+		
+		
 	}
 	
 
@@ -103,6 +120,7 @@ public class ParkingLotController implements Initializable{
 	public void unPark() {
 		String plate = getPlate();
 		myParkingLot.removeVehicle(plate);
+		toHelpTextArea(plate + " Removed");
 		toText();
 	}
 	

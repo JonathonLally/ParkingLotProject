@@ -1,7 +1,7 @@
 package model;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 public class ParkingLot {
@@ -39,7 +39,7 @@ public class ParkingLot {
 	}
 	
 	public boolean checkForOpenMotorcycleSpots() {
-		if (currentMotoStackItem <= motorcycleStackSize) {
+		if (currentMotoStackItem < motorcycleStackSize) {
 			return true;
 		}
 		else {
@@ -48,7 +48,7 @@ public class ParkingLot {
 	}
 	
 	public boolean checkForOpenSedanSpots() {
-		if (currentSedanStackItem <= sedanStackSize) {
+		if (currentSedanStackItem < sedanStackSize) {
 			return true;
 		}
 		else {
@@ -57,7 +57,7 @@ public class ParkingLot {
 	}
 	
 	public boolean checkForOpenSuvSpots() {
-		if (currentSuvStackItem <= suvStackSize) {
+		if (currentSuvStackItem < suvStackSize) {
 			return true;
 		}
 		else {
@@ -66,7 +66,7 @@ public class ParkingLot {
 	}
 	
 	public boolean checkForOpenBusSpots() {
-		if (currentBusStackItem <= busStackSize) {
+		if (currentBusStackItem < busStackSize) {
 			return true;
 		}
 		else {
@@ -115,20 +115,55 @@ public class ParkingLot {
 	}
 	
 	public void removeVehicle(String key) {
-		Vehicle temp = hashmap.get(key).getVehicle();
-		System.out.println("Vehicle has been found : " + temp.toString());
-		removeFromStack(temp);
-		hashmap.remove(key);
+		try {
+			Vehicle temp = hashmap.get(key).getVehicle();
+			System.out.println("Vehicle has been found : " + temp.toString()); //Remove eventually
+			removeFromStack(temp);
+			hashmap.remove(key);
+		} catch (NullPointerException e) {
+			System.out.println("Not a valid key");
+		}
 	}
 	
 	public void removeFromStack(Vehicle vehicle) {
-		System.out.println("Vehicle to be removed" + vehicle.toString());
+		Vehicle temp = vehicle;
+		System.out.println("Vehicle to be removed" + vehicle.toString()); //Remove eventually
+		if (temp.getType().equals("Motorcycle")) {
+			motorcycleStack.pop();
+			currentMotoStackItem--;
+		} else if (temp.getType().equals("Sedan")) {
+			sedanStack.pop();
+			currentSedanStackItem--;
+		} else if (temp.getType().equals("SUV")) {
+			suvStack.pop();
+			currentSuvStackItem--;			
+		} else if (temp.getType().equals("Bus")) {
+			busStack.pop();
+			currentBusStackItem--;			
+		}
+		
 		
 	}
 	
 	public String display() { //Make this nice at some point TODO
 		return hashmap.values().toString();
-	}	
+	}
+	
+	public String getDisplay() {
+		String output;
+		StringBuilder tempout = new StringBuilder();
+		for(Entry<String, ParkingSpace> entry:hashmap.entrySet()) {
+			String key = entry.getKey();
+			Vehicle temp = entry.getValue().getVehicle();
+			tempout.append(key + " " + temp.toString());
+		}
+		output = tempout.toString();
+		return output;
+	}
+	
+	public void getNextAvailableParkingSpace() { //TODO
+		
+	}
 	
 
 }
