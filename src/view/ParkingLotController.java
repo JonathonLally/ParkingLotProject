@@ -43,7 +43,8 @@ public class ParkingLotController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		createParkingLot();
 		VehicleTypeBox.setItems(FXCollections.observableArrayList("Motorcycle", "Sedan", "SUV", "Bus")
-				);		
+				);	
+		toHelpTextArea("Default Parking Lot Created" + "\n" + " 5 Moto 20 Sedan 10 SUV 2 Buses");
 	}
 	
 	public void createParkingLot() {
@@ -93,21 +94,36 @@ public class ParkingLotController implements Initializable{
 			String vType = getVType();
 			clearChoices();
 			if (vType.equals("Motorcycle")) {
-				myParkingLot.addMotorCycle(new Motorcycle(plate));
+				if (myParkingLot.addMotorCycle(new Motorcycle(plate))) {
+					toHelpTextArea(plate + " Parked");
+				} else {
+					toHelpTextArea(plate + " Not Added, Motorcycle Parking Full");
+				}
 			} else if (vType.equals("Sedan")) {
-				myParkingLot.addSedan(new Sedan(plate));
+				if (myParkingLot.addSedan(new Sedan(plate))) {
+					toHelpTextArea(plate + " Parked");
+				} else {
+					toHelpTextArea(plate + " Not Parked, Sedan Parking Full");
+				}
 			} else if (vType.equals("SUV")) {
-				myParkingLot.addSuv(new Suv(plate));
+				if (myParkingLot.addSuv(new Suv(plate))) {
+					toHelpTextArea(plate + " Parked");
+				} else {
+					toHelpTextArea(plate + " Not Parked, SUV parking full");
+				}
 			} else if (vType.equals("Bus")) {
-				myParkingLot.addBus(new Bus(plate));
+				if(myParkingLot.addBus(new Bus(plate))) {
+					toHelpTextArea(plate + " Parked");
+				} else {
+					toHelpTextArea(plate + " Not Parked, Bus parking full");
+				}
 			} else if (vType.equals(null)) {
 				toHelpTextArea("Please choose a Vehicle Type");
 			}
 			else {
 				System.out.println("Park Not working");			
 			}
-			toHelpTextArea(plate + " Added");
-			toText();
+			toText();			
 		} catch (NullPointerException e) {
 			toHelpTextArea("Please choose a Vehicle Type");
 		}		
@@ -125,10 +141,12 @@ public class ParkingLotController implements Initializable{
 	
 	public void editParkingLotSize() { //Needs a new window to pop open and ask
 		myParkingLot = new ParkingLot(4, 5, 6, 3); //For now just another size
-		System.out.println("Parking Lot Size Changed");
+		toHelpTextArea("Parking Lot Resize" + "\n" + "4 Moto 5 Sedan 6 SUV 3 Bus");
+	}	
+	
+	public void help() {
+		toHelpTextArea("Enter a License Plate # and Vehicle Type" + "\n" + 
+				"Then press Park/Unpark to add/remove");
 	}
-	
-	
-	
 
 }

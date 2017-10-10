@@ -20,9 +20,5 @@ public abstract class Vehicle {
 	public String toString() {
 		return "Type " + this.getType();
 	}
-	
-	
-	
-	
 
 }

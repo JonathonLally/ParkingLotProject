@@ -17,10 +17,7 @@ public class ParkingLot {
 	private int currentMotoStackItem;
 	private int currentSedanStackItem;
 	private int currentSuvStackItem;
-	private int currentBusStackItem;
-	private ParkingSpace[] parkingSpaceArray;
-	
-	
+	private int currentBusStackItem;	
 	
 	
 	public ParkingLot(int motoSpaces, int sedanSpaces, int suvSpaces, int busSpaces) {
@@ -37,7 +34,6 @@ public class ParkingLot {
 		currentSedanStackItem = 0;
 		currentSuvStackItem = 0;
 		currentBusStackItem = 0;
-		createParkingSpaces(motoSpaces, sedanSpaces, suvSpaces, busSpaces);
 	}
 	
 	public boolean checkForOpenMotorcycleSpots() {
@@ -76,43 +72,51 @@ public class ParkingLot {
 		}
 	}
 	
-	public void addMotorCycle(Motorcycle motorcycle) {
+	public boolean addMotorCycle(Motorcycle motorcycle) {
 		if (checkForOpenMotorcycleSpots()) {
 			motorcycleStack.push(motorcycle);
 			currentMotoStackItem++; //TODO
-			hashmap.put(motorcycle.getPlate(), new ParkingSpace(motorcycle)); //Fix this to find next parking space
+			hashmap.put(motorcycle.getPlate(), new ParkingSpace(motorcycle));
+			return true;
 		} else {
 			System.out.println("Motorcycle Stack is full");
+			return false;
 		}
 	}
 	
-	public void addSedan(Sedan sedan) {
+	public boolean addSedan(Sedan sedan) {
 		if (checkForOpenSedanSpots()) {
 			sedanStack.push(sedan);
-			currentSedanStackItem++; //TODO
-			hashmap.put(sedan.getPlate(), new ParkingSpace(sedan)); //Fix this to find next parking space
+			currentSedanStackItem++;
+			hashmap.put(sedan.getPlate(), new ParkingSpace(sedan));
+			return true;
 		} else {
 			System.out.println("Sedan Stack is full");
+			return false;
 		}
 	}
 	
-	public void addSuv(Suv suv) {
+	public boolean addSuv(Suv suv) {
 		if (checkForOpenSuvSpots()) {
 			suvStack.push(suv);
 			currentSuvStackItem++; //TODO
-			hashmap.put(suv.getPlate(), new ParkingSpace(suv)); //Fix this to find next parking space
+			hashmap.put(suv.getPlate(), new ParkingSpace(suv)); 
+			return true;
 		} else {
 			System.out.println("Suv Stack is full");
+			return false;
 		}
 	}
 	
-	public void addBus(Bus bus) {
+	public boolean addBus(Bus bus) {
 		if (checkForOpenBusSpots()) {
 			busStack.push(bus);
 			currentBusStackItem++; //TODO
-			hashmap.put(bus.getPlate(), new ParkingSpace(bus)); //Fix this to find next parking space
+			hashmap.put(bus.getPlate(), new ParkingSpace(bus)); 
+			return true;
 		} else {
 			System.out.println("Bus Stack is full");
+			return false;
 		}
 	}
 	
@@ -142,45 +146,19 @@ public class ParkingLot {
 		} else if (temp.getType().equals("Bus")) {
 			busStack.pop();
 			currentBusStackItem--;			
-		}
-		
-		
+		}			
 	}
 	
-	public String getDisplay() {
+	public String getDisplay() { //This gets the data from the hashmap for display.
 		String output;
 		StringBuilder tempout = new StringBuilder();
 		for(Entry<String, ParkingSpace> entry:hashmap.entrySet()) {
 			String key = entry.getKey();
 			Vehicle temp = entry.getValue().getVehicle();
-			tempout.append("Plate# " + key + " " + temp.toString() + " "+ "Spot#  " +
-					entry.getValue().getParkingSpaceNumber() + "\n");
+			tempout.append("Plate# " + key + " " + temp.toString() + "\n");
 		}
 		output = tempout.toString();
 		return output;
-	}
-	
-	public void createParkingSpaces(int motos, int sedans, int suvs, int buses) { //Creates array of parkingSpaces
-		int total = motos + sedans + suvs + buses;
-		parkingSpaceArray = new ParkingSpace[total];
-		int tempcount = 0;
-		for (int i = 0; i < motos; i++) {
-			parkingSpaceArray[tempcount] = new ParkingSpace("M" + tempcount++, "Motorcycle");
-		}
-		for (int i = 0; i < sedans; i++) {
-			parkingSpaceArray[tempcount] = new ParkingSpace("S" + tempcount++, "Sedan");
-		}
-		for (int i = 0; i < suvs; i++) {
-			parkingSpaceArray[tempcount] = new ParkingSpace("L" + tempcount++, "SUV");
-		}
-		for (int i = 0; i < buses; i++) {
-			parkingSpaceArray[tempcount] = new ParkingSpace("B" + tempcount++, "Bus");
-		}
-	}
-	
-	public void getNextAvailableParkingSpace() { //TODO
-		
-	}
-	
+	}	
 
 }
